@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Halley & Noah - Disney Fairytale Wedding</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@600;700;900&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&family=Pinyon+Script&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: {
+              900: '#0b132b',
+              800: '#1c2541',
+              700: '#0f172a',
+              600: '#1e293b'
+            },
+            gold: {
+              100: '#fcf6ba',
+              200: '#f3e5ab',
+              300: '#d4af37',
+              400: '#bf953f',
+              500: '#b38728'
+            }
+          },
+          fontFamily: {
+            serif: ['Cinzel', 'serif'],
+            display: ['Cinzel Decorative', 'serif'],
+            script: ['Pinyon Script', 'cursive'],
+            sans: ['Montserrat', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b132b;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #bf953f;
+      border-radius: 4px;
+    }
+
+    /* Background Gradients & Sparkles */
+    body {
+      background: radial-gradient(circle at 50% 20%, #1c2541 0%, #0b132b 70%, #080d1e 100%);
+      color: #f8fafc;
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* Metallic Gold Text Effect */
+    .gold-text {
+      background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    }
+
+    .gold-subtitle {
+      color: #f3e5ab;
+      text-shadow: 0 0 8px rgba(243, 229, 171, 0.3);
+    }
+
+    /* Metallic Gold Border & Glassmorphism */
+    .disney-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 175, 55, 0.4);
+      box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37), 0 0 15px rgba(212, 175, 55, 0.15);
+      border-radius: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .disney-card:hover {
+      border-color: rgba(212, 175, 55, 0.7);
+      box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.45), 0 0 25px rgba(212, 175, 55, 0.25);
+    }
+
+    /* Metallic Buttons */
+    .btn-gold {
+      background: linear-gradient(135deg, #bf953f 0%, #fcf6ba 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+      color: #0b132b;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      letter-spacing: 1px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+    }
+
+    .btn-gold:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(212, 175, 55, 0.5), 0 0 12px rgba(252, 246, 186, 0.6);
+      background: linear-gradient(135deg, #cfa64f 0%, #ffffff 30%, #c49839 60%, #fbf5b7 100%);
+    }
+
+    /* Dynamic Canvas Particles */
+    #sparkle-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Floating Disney Castle SVG Glow */
+    .castle-glow {
+      filter: drop-shadow(0px 0px 12px rgba(212, 175, 55, 0.6));
+    }
+
+    /* Ornamental Dividers */
+    .gold-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .gold-divider::before,
+    .gold-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.6), transparent);
+    }
+
+    .gold-divider-icon {
+      padding: 0 1rem;
+      color: #d4af37;
+    }
+  </style>
+</head>
+<body class="relative min-h-screen selection:bg-gold-300 selection:text-navy-900">
+
+  <!-- Interactive Sparkle Canvas Layer -->
+  <canvas id="sparkle-canvas"></canvas>
+
+  <div class="relative z-10 flex flex-col min-h-screen">
+
+    <!-- Sticky Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-navy-900/90 backdrop-blur-md border-b border-gold-300/40 transition-all duration-300">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-20">
+          
+          <!-- Logo / Brand Title -->
+          <div class="flex items-center space-x-3">
+            <svg class="w-8 h-8 text-gold-300 castle-glow" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2L9.5 6H11v3H8V7L6 9v2H4V8L2 10v11h20V10l-2-2v3h-2V9l-2-2v2h-3V6h1.5L12 2zm0 8a2 2 0 1 1 0 4 2 2 0 0 1 0-4zm-6 8h12v3H6v-3z"/>
+            </svg>
+            <a href="#home" class="font-display text-xl sm:text-2xl gold-text tracking-wider uppercase">Ciardi Wedding</a>
+          </div>
+
+          <!-- Desktop Navigation Links -->
+          <nav class="hidden md:flex space-x-6 lg:space-x-8">
+            <a href="#home" class="font-serif text-sm text-gold-200 hover:text-white transition-colors duration-200 py-1 border-b-2 border-transparent hover:border-gold-300">Home</a>
+            <a href="#event-info" class="font-serif text-sm text-gold-200 hover:text-white transition-colors duration-200 py-1 border-b-2 border-transparent hover:border-gold-300">Event Info</a>
+            <a href="#accommodations" class="font-serif text-sm text-gold-200 hover:text-white transition-colors duration-200 py-1 border-b-2 border-transparent hover:border-gold-300">Hotels & Stay</a>
+            <a href="#tickets" class="font-serif text-sm text-gold-200 hover:text-white transition-colors duration-200 py-1 border-b-2 border-transparent hover:border-gold-300">Tickets & Parks</a>
+            <a href="#faq" class="font-serif text-sm text-gold-200 hover:text-white transition-colors duration-200 py-1 border-b-2 border-transparent hover:border-gold-300">FAQ</a>
+          </nav>
+
+          <!-- Mobile Hamburger Button -->
+          <div class="md:hidden">
+            <button id="mobile-menu-button" type="button" class="text-gold-300 hover:text-white focus:outline-none p-2" aria-label="Toggle Navigation">
+              <svg class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile Navigation Dropdown -->
+      <div id="mobile-menu" class="hidden md:hidden bg-navy-900/95 border-b border-gold-300/40 px-4 pt-2 pb-6 space-y-3">
+        <a href="#home" class="mobile-link block font-serif text-base text-gold-200 hover:text-white py-2">Home</a>
+        <a href="#event-info" class="mobile-link block font-serif text-base text-gold-200 hover:text-white py-2">Event Info</a>
+        <a href="#accommodations" class="mobile-link block font-serif text-base text-gold-200 hover:text-white py-2">Hotels & Stay</a>
+        <a href="#tickets" class="mobile-link block font-serif text-base text-gold-200 hover:text-white py-2">Tickets & Parks</a>
+        <a href="#faq" class="mobile-link block font-serif text-base text-gold-200 hover:text-white py-2">FAQ</a>
+      </div>
+    </header>
+
+    <!-- Main Content Body -->
+    <main class="flex-grow">
+
+      <!-- Section 1: Hero Banner & Announcement -->
+      <section id="home" class="relative pt-12 pb-20 px-4 sm:px-6 lg:px-8 text-center max-w-5xl mx-auto flex flex-col items-center justify-center min-h-[85vh]">
+        
+        <!-- Live Status Announcement Banner -->
+        <div class="mb-8 px-6 py-3 rounded-full bg-navy-800/80 border border-gold-300/50 shadow-lg inline-flex items-center space-x-3 max-w-full animate-pulse">
+          <span class="flex h-3 w-3 relative">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-gold-300 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-gold-400"></span>
+          </span>
+          <p class="text-xs sm:text-sm font-medium text-gold-200 truncate">
+            Constantly Updated as Details are Finalized with Our Disney Wedding Team!
+          </p>
+        </div>
+
+        <!-- Script Intro -->
+        <p class="font-script text-4xl sm:text-6xl lg:text-7xl text-gold-200 mb-2 leading-tight">Welcome to the Fairytale</p>
+        
+        <!-- Main Names Header -->
+        <h1 class="font-display text-3xl sm:text-5xl lg:text-6xl gold-text font-bold tracking-wide uppercase mb-6 leading-tight">
+          Halley & Partner's<br>Disney Fairytale Wedding
+        </h1>
+
+        <div class="w-32 h-1 bg-gradient-to-r from-transparent via-gold-300 to-transparent my-4"></div>
+
+        <!-- Date & Location -->
+        <div class="font-serif text-lg sm:text-2xl text-slate-100 font-semibold tracking-wider mb-6">
+          July 20, 2027 <span class="text-gold-300 mx-2">•</span> Walt Disney World®, Orlando, FL
+        </div>
+
+        <!-- Tagline -->
+        <p class="max-w-2xl text-base sm:text-lg text-slate-300 font-light leading-relaxed mb-10">
+          We are overjoyed to celebrate our special day in the most magical place on earth! We invite you to join us for our wedding and treat yourself to an unforgettable summer Disney vacation.
+        </p>
+
+        <!-- CTA Action Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 w-full max-w-md justify-center">
+          <a href="#event-info" class="btn-gold px-8 py-4 rounded-xl text-center text-sm uppercase tracking-widest transition">
+            View Schedule
+          </a>
+          <a href="#accommodations" class="px-8 py-4 rounded-xl text-center font-serif text-sm font-semibold tracking-widest text-gold-200 border border-gold-300/60 hover:bg-gold-300/10 transition">
+            Guest Accommodations
+          </a>
+        </div>
+      </section>
+
+      <!-- Section Divider -->
+      <div class="gold-divider max-w-4xl mx-auto px-4">
+        <span class="gold-divider-icon">✦ ✧ ✦</span>
+      </div>
+
+      <!-- Section 2: Event Schedule & Location -->
+      <section id="event-info" class="py-16 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="font-display text-3xl sm:text-4xl gold-text mb-3 uppercase tracking-wider">Event Info & Schedule</h2>
+          <p class="font-serif text-gold-subtitle text-lg">Tuesday, July 20, 2027</p>
+        </div>
+
+        <!-- Grid of Venue Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <!-- Card 1: Ceremony -->
+          <div class="disney-card p-6 sm:p-8 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-full bg-gold-300/10 border border-gold-300/40 flex items-center justify-center text-gold-300 mb-6">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 21l-8-9a6 6 0 1110-8 6 6 0 1110 8l-8 9z"/>
+                </svg>
+              </div>
+              <span class="text-xs font-serif text-gold-300 uppercase tracking-widest">The Ceremony</span>
+              <h3 class="font-serif text-xl sm:text-2xl text-white font-semibold mt-1 mb-3">Disney's Wedding Pavilion</h3>
+              <p class="text-xs text-gold-200 mb-4 font-medium">Disney's Grand Floridian Resort & Spa</p>
+              
+              <ul class="space-y-3 text-sm text-slate-300 border-t border-gold-300/20 pt-4 mb-6">
+                <li class="flex justify-between">
+                  <span class="text-slate-400">Arrival & Seating:</span>
+                  <span class="font-semibold text-gold-100">12:00 PM – 12:15 PM</span>
+                </li>
+                <li class="flex justify-between">
+                  <span class="text-slate-400">Ceremony Begins:</span>
+                  <span class="font-semibold text-gold-100">12:30 PM</span>
+                </li>
+                <li class="flex justify-between">
+                  <span class="text-slate-400">Concludes:</span>
+                  <span class="font-semibold text-gold-100">1:00 PM</span>
+                </li>
+              </ul>
+            </div>
+            <p class="text-xs text-slate-400 italic">Nestled on its own private island with a fairytale view of Cinderella Castle across the Seven Seas Lagoon.</p>
+          </div>
+
+          <!-- Card 2: Cocktail Hour -->
+          <div class="disney-card p-6 sm:p-8 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-full bg-gold-300/10 border border-gold-300/40 flex items-center justify-center text-gold-300 mb-6">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 15.5a5 5 0 01-7 0l-2-2-2 2a5 5 0 01-7 0M12 3v10"/>
+                </svg>
+              </div>
+              <span class="text-xs font-serif text-gold-300 uppercase tracking-widest">Cocktails & Refreshments</span>
+              <h3 class="font-serif text-xl sm:text-2xl text-white font-semibold mt-1 mb-3">Whitehall Room & Patio</h3>
+              <p class="text-xs text-gold-200 mb-4 font-medium">Disney's Grand Floridian Resort & Spa</p>
+              
+              <ul class="space-y-3 text-sm text-slate-300 border-t border-gold-300/20 pt-4 mb-6">
+                <li class="flex justify-between">
+                  <span class="text-slate-400">Cocktail Hour:</span>
+                  <span class="font-semibold text-gold-100">1:00 PM – 2:00 PM</span>
+                </li>
+              </ul>
+            </div>
+            <p class="text-xs text-slate-400 italic">Enjoy light bites and signature beverages on the charming outdoor garden patio immediately following the ceremony.</p>
+          </div>
+
+          <!-- Card 3: Dinner & Reception -->
+          <div class="disney-card p-6 sm:p-8 flex flex-col justify-between">
+            <div>
+              <div class="w-12 h-12 rounded-full bg-gold-300/10 border border-gold-300/40 flex items-center justify-center text-gold-300 mb-6">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l4 16m2-16l-4 16"/>
+                </svg>
+              </div>
+              <span class="text-xs font-serif text-gold-300 uppercase tracking-widest">Dinner & Dancing</span>
+              <h3 class="font-serif text-xl sm:text-2xl text-white font-semibold mt-1 mb-3">Grand Floridian Ballroom</h3>
+              <p class="text-xs text-gold-200 mb-4 font-medium">Salons 7–9 • Grand Floridian Convention Center</p>
+              
+              <ul class="space-y-3 text-sm text-slate-300 border-t border-gold-300/20 pt-4 mb-6">
+                <li class="flex justify-between">
+                  <span class="text-slate-400">Reception:</span>
+                  <span class="font-semibold text-gold-100">2:00 PM – 6:00 PM</span>
+                </li>
+              </ul>
+            </div>
+            <p class="text-xs text-slate-400 italic">An elegant afternoon of dining, toasts, and dancing in Victorian splendor.</p>
+          </div>
+
+        </div>
+
+        <!-- Dining Update Note -->
+        <div class="mt-8 disney-card p-6 text-center max-w-3xl mx-auto border-dashed">
+          <h4 class="font-serif text-gold-200 text-base font-semibold mb-2">🍽️ Culinary & Menu Planning</h4>
+          <p class="text-sm text-slate-300 leading-relaxed">
+            "Menu details and culinary selections will be updated as soon as we finalize them with our Disney Wedding Team."
+          </p>
+        </div>
+      </section>
+
+      <!-- Section Divider -->
+      <div class="gold-divider max-w-4xl mx-auto px-4">
+        <span class="gold-divider-icon">✦ ✧ ✦</span>
+      </div>
+
+      <!-- Section 3: Accommodations & Room Blocks -->
+      <section id="accommodations" class="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="font-display text-3xl sm:text-4xl gold-text mb-3 uppercase tracking-wider">Hotels & Staying On-Site</h2>
+          <p class="font-serif text-gold-subtitle text-lg">Disney Resort Accommodations</p>
+        </div>
+
+        <div class="disney-card p-8 sm:p-10 mb-8">
+          <!-- Status Banner -->
+          <div class="bg-navy-800/90 border border-gold-300/40 rounded-lg p-4 mb-8 flex items-start space-x-3">
+            <svg class="w-6 h-6 text-gold-300 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <div>
+              <h4 class="text-sm font-serif font-bold text-gold-200 uppercase tracking-wide">Room Block Status</h4>
+              <p class="text-sm text-slate-300 mt-1">
+                Our official room block contract is currently under negotiation with our Disney Wedding Coordinator. Special discounted booking links and codes will be posted right here as soon as they are active!
+              </p>
+            </div>
+          </div>
+
+          <!-- Tiered Resort Options -->
+          <h3 class="font-serif text-xl text-white mb-6 font-semibold">Tiered Disney Resort Options</h3>
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="p-5 rounded-lg bg-navy-900/60 border border-gold-300/20">
+              <h4 class="font-serif text-gold-300 font-bold mb-2">Value Resorts</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">Whimsical theme park icons, vibrant pools, and fun Disney immersion for guests seeking cost-effective lodging.</p>
+            </div>
+            <div class="p-5 rounded-lg bg-navy-900/60 border border-gold-300/20">
+              <h4 class="font-serif text-gold-300 font-bold mb-2">Moderate Resorts</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">Beautiful thematic landscapes, relaxed dining, and excellent amenities offering the perfect balance of comfort and style.</p>
+            </div>
+            <div class="p-5 rounded-lg bg-navy-900/60 border border-gold-300/20">
+              <h4 class="font-serif text-gold-300 font-bold mb-2">Deluxe & Luxury</h4>
+              <p class="text-xs text-slate-300 leading-relaxed">Stay steps away from the wedding venue at Disney's Grand Floridian Resort or surrounding monorail resorts.</p>
+            </div>
+          </div>
+
+          <!-- Flexibility Callout -->
+          <div class="border-t border-gold-300/20 pt-6">
+            <div class="flex items-center space-x-3 text-gold-200">
+              <svg class="w-6 h-6 text-gold-300 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+              <h4 class="font-serif font-bold text-base">Extend Your Magical Vacation!</h4>
+            </div>
+            <p class="text-sm text-slate-300 mt-2 leading-relaxed">
+              Guests will have the flexible option to extend their stay up to <span class="text-gold-200 font-semibold">+/- 5 nights</span> around our wedding date (July 20, 2027) while enjoying the same negotiated discounted room block rate!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Divider -->
+      <div class="gold-divider max-w-4xl mx-auto px-4">
+        <span class="gold-divider-icon">✦ ✧ ✦</span>
+      </div>
+
+      <!-- Section 4: Theme Park Tickets & Planning -->
+      <section id="tickets" class="py-16 px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="font-display text-3xl sm:text-4xl gold-text mb-3 uppercase tracking-wider">Theme Parks & Planning</h2>
+          <p class="font-serif text-gold-subtitle text-lg">Turn Your Trip into an Unforgettable Vacation</p>
+        </div>
+
+        <div class="disney-card p-8 sm:p-10">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h3 class="font-serif text-2xl text-white font-semibold mb-4">Explore Walt Disney World®</h3>
+              <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                From Cinderella Castle at Magic Kingdom to the international flavors at EPCOT, the thrilling adventures of Disney's Hollywood Studios, and the wild wonders of Disney's Animal Kingdom, there is magic everywhere you look.
+              </p>
+              <p class="text-sm text-slate-300 leading-relaxed">
+                Specially discounted wedding guest park tickets and ticket purchasing links will be made available as we finalize our group arrangements with Walt Disney World® Resort.
+              </p>
+            </div>
+            <div class="bg-navy-900/80 p-6 rounded-xl border border-gold-300/30 text-center">
+              <svg class="w-12 h-12 text-gold-300 mx-auto mb-4 castle-glow" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 2l2.5 5h5.5l-4.5 3.5 1.5 5.5-5-3.5-5 3.5 1.5-5.5-4.5-3.5h5.5z"/>
+              </svg>
+              <h4 class="font-serif text-gold-200 font-bold mb-2">Park Ticket Updates Coming Soon</h4>
+              <p class="text-xs text-slate-400">
+                We recommend waiting to purchase standard park tickets until our wedding group ticket portal goes live for exclusive options.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section Divider -->
+      <div class="gold-divider max-w-4xl mx-auto px-4">
+        <span class="gold-divider-icon">✦ ✧ ✦</span>
+      </div>
+
+      <!-- Section 5: Frequently Asked Questions -->
+      <section id="faq" class="py-16 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="font-display text-3xl sm:text-4xl gold-text mb-3 uppercase tracking-wider">Frequently Asked Questions</h2>
+          <p class="font-serif text-gold-subtitle text-lg">Everything You Need to Know</p>
+        </div>
+
+        <div class="space-y-6">
+          
+          <!-- FAQ 1 -->
+          <div class="disney-card p-6">
+            <h3 class="font-serif text-lg text-gold-200 font-semibold mb-2 flex items-center">
+              <span class="text-gold-300 mr-2">✦</span> What is the Dress Code?
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed pl-6">
+              Dress well, feel great, but no need to go over the top! Smart casual or elevated garden party attire is wonderful for a warm Florida July day.
+            </p>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="disney-card p-6">
+            <h3 class="font-serif text-lg text-gold-200 font-semibold mb-2 flex items-center">
+              <span class="text-gold-300 mr-2">✦</span> Are Gifts or Registry Expected?
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed pl-6">
+              No wedding registry will be created and no gifts are expected! Your presence with us at Walt Disney World is the greatest gift of all.
+            </p>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="disney-card p-6">
+            <h3 class="font-serif text-lg text-gold-200 font-semibold mb-2 flex items-center">
+              <span class="text-gold-300 mr-2">✦</span> Can We Turn This Into a Vacation?
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed pl-6">
+              Absolutely! We encourage all of our family and friends to treat this as a wonderful excuse to take a memorable vacation with your loved ones!
+            </p>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="disney-card p-6">
+            <h3 class="font-serif text-lg text-gold-200 font-semibold mb-2 flex items-center">
+              <span class="text-gold-300 mr-2">✦</span> How Often Will This Page Be Updated?
+            </h3>
+            <p class="text-sm text-slate-300 leading-relaxed pl-6">
+              Check back often! We will continuously update this page as pricing, hotel ticket discounts, menu options, and schedule specifics are locked in.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 border-t border-gold-300/40 py-10 text-center text-xs text-slate-400 relative z-10">
+      <div class="max-w-7xl mx-auto px-4 space-y-3">
+        <p class="font-serif text-gold-200 text-sm">Halley & Partner • July 20, 2027</p>
+        <p>© 2027 Ciardi Wedding. Disney elements and resort names are trademarks of Walt Disney World®.</p>
+        <p class="text-slate-500">Crafted with magic and fairytale dreams.</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- Interactive JavaScript -->
+  <script>
+    // Canvas Pixi/Dust Particle Sparkle Effect
+    const canvas = document.getElementById('sparkle-canvas');
+    const ctx = canvas.getContext('2d');
+
+    let particles = [];
+    const particleCount = 45;
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor() {
+        this.reset();
+      }
+
+      reset() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 2.5 + 0.5;
+        this.speedY = -(Math.random() * 0.5 + 0.2);
+        this.speedX = (Math.random() - 0.5) * 0.3;
+        this.opacity = Math.random() * 0.8 + 0.2;
+        this.fade = Math.random() * 0.01 + 0.005;
+      }
+
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        this.opacity -= this.fade;
+
+        if (this.opacity <= 0 || this.y < 0) {
+          this.reset();
+          this.y = canvas.height + 10;
+        }
+      }
+
+      draw() {
+        ctx.save();
+        ctx.globalAlpha = this.opacity;
+        ctx.fillStyle = '#fcf6ba';
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#d4af37';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < particleCount; i++) {
+      particles.push(new Particle());
+    }
+
+    function animateSparkles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+      requestAnimationFrame(animateSparkles);
+    }
+
+    animateSparkles();
+
+    // Mobile Navigation Toggle Logic
+    const mobileMenuBtn = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+  </script>
+</body>
+</html>
