@@ -41,16 +41,16 @@
       width: 8px;
     }
     ::-webkit-scrollbar-track {
-      background: #f1f5f9;
+      background: #fbf8f3;
     }
     ::-webkit-scrollbar-thumb {
       background: #92A1C3;
       border-radius: 4px;
     }
 
-    /* Light Background */
+    /* Soft Cream Background */
     body {
-      background: radial-gradient(circle at 50% 20%, #ffffff 0%, #f8fafc 70%, #f1f5f9 100%);
+      background: radial-gradient(circle at 50% 20%, #fffdf9 0%, #fbf7f0 70%, #f4efe6 100%);
       color: #1B2433;
       font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
@@ -62,12 +62,12 @@
       color: #1B2433;
     }
 
-    /* Clean Light Glassmorphism Cards */
+    /* Clean Cream Glassmorphism Cards */
     .disney-card {
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 253, 249, 0.9);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
-      border: 1px solid rgba(190, 209, 227, 0.6);
+      border: 1px solid rgba(190, 209, 227, 0.5);
       box-shadow: 0 10px 30px 0 rgba(27, 36, 51, 0.05), 0 0 15px rgba(204, 165, 201, 0.1);
       border-radius: 1rem;
       transition: all 0.3s ease;
@@ -140,7 +140,7 @@
   <div class="relative z-10 flex flex-col min-h-screen">
 
     <!-- Header Navigation -->
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-brand-powder/45 transition-all duration-300 shadow-sm">
+    <header class="sticky top-0 z-50 bg-[#fffdf9]/90 backdrop-blur-md border-b border-brand-powder/45 transition-all duration-300 shadow-sm">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-20">
           
@@ -173,7 +173,7 @@
       </div>
 
       <!-- Mobile Navigation Drawer -->
-      <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-brand-powder/40 px-4 pt-2 pb-6 space-y-3 shadow-md">
+      <div id="mobile-menu" class="hidden md:hidden bg-[#fffdf9] border-b border-brand-powder/40 px-4 pt-2 pb-6 space-y-3 shadow-md">
         <a href="#home" class="mobile-link block text-base font-medium text-slate-800 hover:text-brand-rose py-2">Home</a>
         <a href="#event-info" class="mobile-link block text-base font-medium text-slate-800 hover:text-brand-rose py-2">Event Info</a>
         <a href="#accommodations" class="mobile-link block text-base font-medium text-slate-800 hover:text-brand-rose py-2">Hotels & Stay</a>
@@ -189,7 +189,7 @@
       <section id="home" class="relative pt-12 pb-20 px-4 sm:px-6 lg:px-8 text-center max-w-5xl mx-auto flex flex-col items-center justify-center min-h-[85vh]">
         
         <!-- Live Status Announcement Banner -->
-        <div class="mb-8 px-6 py-3 rounded-full bg-brand-blush/50 border border-brand-rose/50 shadow-sm inline-flex items-center space-x-3 max-w-full">
+        <div class="mb-8 px-6 py-3 rounded-full bg-brand-blush/40 border border-brand-rose/40 shadow-sm inline-flex items-center space-x-3 max-w-full">
           <span class="flex h-3 w-3 relative">
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-rose opacity-75"></span>
             <span class="relative inline-flex rounded-full h-3 w-3 bg-brand-rose"></span>
@@ -343,7 +343,7 @@
 
         <div class="disney-card p-8 sm:p-10 mb-8">
           <!-- Status Banner -->
-          <div class="bg-brand-blush/40 border border-brand-rose/50 rounded-lg p-4 mb-8 flex items-start space-x-3">
+          <div class="bg-brand-blush/30 border border-brand-rose/40 rounded-lg p-4 mb-8 flex items-start space-x-3">
             <svg class="w-6 h-6 text-brand-rose flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
             </svg>
@@ -358,15 +358,15 @@
           <!-- Tiered Resort Options -->
           <h3 class="font-serif text-xl text-slate-900 mb-6 font-semibold">Tiered Disney Resort Options</h3>
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="p-5 rounded-lg bg-white border border-brand-powder/60 shadow-sm">
+            <div class="p-5 rounded-lg bg-[#fffdf9] border border-brand-powder/60 shadow-sm">
               <h4 class="text-brand-slate font-bold mb-2">Value Resorts</h4>
               <p class="text-xs text-slate-700 leading-relaxed">Whimsical theme park icons, vibrant pools, and fun Disney immersion for guests seeking cost-effective lodging.</p>
             </div>
-            <div class="p-5 rounded-lg bg-white border border-brand-powder/60 shadow-sm">
+            <div class="p-5 rounded-lg bg-[#fffdf9] border border-brand-powder/60 shadow-sm">
               <h4 class="text-brand-slate font-bold mb-2">Moderate Resorts</h4>
               <p class="text-xs text-slate-700 leading-relaxed">Beautiful thematic landscapes, relaxed dining, and excellent amenities offering the perfect balance of comfort and style.</p>
             </div>
-            <div class="p-5 rounded-lg bg-white border border-brand-powder/60 shadow-sm">
+            <div class="p-5 rounded-lg bg-[#fffdf9] border border-brand-powder/60 shadow-sm">
               <h4 class="text-brand-slate font-bold mb-2">Deluxe & Luxury</h4>
               <p class="text-xs text-slate-700 leading-relaxed">Stay steps away from the wedding venue at Disney's Grand Floridian Resort or surrounding monorail resorts.</p>
             </div>
@@ -410,7 +410,7 @@
                 Specially discounted wedding guest park tickets and ticket purchasing links will be made available as we finalize our group arrangements with Walt Disney World® Resort.
               </p>
             </div>
-            <div class="bg-white p-6 rounded-xl border border-brand-powder/60 text-center shadow-sm">
+            <div class="bg-[#fffdf9] p-6 rounded-xl border border-brand-powder/60 text-center shadow-sm">
               <svg class="w-12 h-12 text-brand-rose mx-auto mb-4 castle-glow" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 2l2.5 5h5.5l-4.5 3.5 1.5 5.5-5-3.5-5 3.5 1.5-5.5-4.5-3.5h5.5z"/>
               </svg>
@@ -466,7 +466,7 @@
 
           <div class="disney-card p-6">
             <h3 class="text-lg text-slate-900 font-semibold mb-2 flex items-center">
-              <span class="text-brand-rose mr-2">✦</span> What is the Dress Code?
+              <span class="text-brand-rose mr-2">✦</span> How Often Will This Page Be Updated?
             </h3>
             <p class="text-sm text-slate-700 leading-relaxed pl-6">
               Check back often! We will continuously update this page as pricing, hotel ticket discounts, menu options, and schedule specifics are locked in.
@@ -479,7 +479,7 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-brand-powder/50 py-10 text-center text-xs text-slate-600 relative z-10 shadow-inner">
+    <footer class="bg-[#fffdf9] border-t border-brand-powder/50 py-10 text-center text-xs text-slate-600 relative z-10 shadow-inner">
       <div class="max-w-7xl mx-auto px-4 space-y-3">
         <p class="font-serif text-slate-900 text-sm">Halley & Noah • July 20, 2027</p>
         <p>© 2027 Ciardi Wedding. Disney elements and resort names are trademarks of Walt Disney World®.</p>
@@ -509,6 +509,7 @@
 
     class Particle {
       constructor() {
+        this.index = 0;
         this.reset();
       }
 
@@ -563,7 +564,7 @@
     animateSparkles();
 
     // Mobile Navigation Toggle
-    const mobileMenuBtn = document.getElementById('mobile-menu-button');
+    const mobileMenuBtn = document.getElementById('mobile-menu-button'); stark = document.getElementById('mobile-menu');
     const mobileMenu = document.getElementById('mobile-menu');
     const mobileLinks = document.querySelectorAll('.mobile-link');
 
